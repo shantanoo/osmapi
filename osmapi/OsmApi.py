@@ -104,7 +104,6 @@ class OsmApi:
         uri = "/api/capabilities"
         data = self._get(uri)
         data = xml.dom.minidom.parseString(data)
-        print data.getElementsByTagName("osm")
         data = data.getElementsByTagName("osm")[0]
         data = data.getElementsByTagName("api")[0]
         result = {}
@@ -112,7 +111,6 @@ class OsmApi:
             if elem.nodeType != elem.ELEMENT_NODE:
                 continue
             result[elem.nodeName] = {}
-            print elem.nodeName
             for k, v in elem.attributes.items():
                 try:
                     result[elem.nodeName][k] = float(v)
