@@ -41,7 +41,12 @@ class TestOsmApi(unittest.TestCase):
         })
 
     def test_NodeGet(self):
-        self._http_get_mock(self._testMethodName + ".xml")
+        self._http_get_mock(
+            os.path.join(
+                __location__,
+                self._testMethodName + ".xml"
+            )
+        )
 
         result = self.api.NodeGet(123)
         assert_equals(result, {
