@@ -2,6 +2,14 @@ from nose.tools import *  # noqa
 import unittest
 import mock
 import osmapi
+import os
+
+__location__ = os.path.realpath(
+    os.path.join(
+        os.getcwd(),
+        os.path.dirname(__file__)
+    )
+)
 
 
 class TestOsmApi(unittest.TestCase):
@@ -23,7 +31,12 @@ class TestOsmApi(unittest.TestCase):
         assert_true(isinstance(self.api, osmapi.OsmApi))
 
     def test_Capabilities(self):
-        self._http_get_mock(self._testMethodName + ".xml")
+        self._http_get_mock(
+            os.path.join(
+                __location__,
+                self._testMethodName + ".xml"
+            )
+        )
 
         result = self.api.Capabilities()
         assert_equals(result, {
